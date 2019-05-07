@@ -14,9 +14,9 @@ router.get('/', function(req, res)
 
 
 router.get('/get', getFromDb)
-router.post('/post/:nombre', postToDb)
-// router.delete('/delete/:nombre', deleteFromDb)
-// router.update('/update/:nombre', updateFromDb)
+router.post('/post', postToDb)
+router.delete('/delete', deleteFromDb)
+router.put('/update', updateFromDb)
 
 
 module.exports = router

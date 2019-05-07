@@ -11,33 +11,38 @@ function getFromDb(req, res)
 
 function postToDb(req, res)
 {
-    db.query(`INSERT INTO clientes (nombre, direccion) VALUES ("${req.params.nombre}", "sin direccion")`, function(err, response)
+    var {nombre, direccion} = req.body;
+
+    db.query(`INSERT INTO clientes (nombre, direccion) VALUES ("${nombre}", "${direccion}")`,function(err, response)
     {
         if(err) throw err;
-
-        res.send(200).json({mensaje:"Insertado"})
     })
-}
 
+    res.send("Insertado")
+}
 
 function deleteFromDb(req, res)
 {
-    db.query('DELETE FROM clientes WHERE nombre = "Chuck"', function(err, response)
+    var {nombre} = req.body;
+
+    db.query(`DELETE FROM clientes WHERE nombre = "${nombre}"`, function(err, response)
     {
         if(err) throw err;
-
-        res.status(200).json({mensaje:'Chuck Eliminado'})
     })
+
+    res.send("Eliminado")
 }
 
 function updateFromDb(req, res)
 {
-    db.query('UPDATE clientes SET nombre = "" WHERE nombre = ""', function(err, response)
+    let {nombreNuevo, nombreViejo} = req.body;
+
+    db.query(`UPDATE clientes SET nombre = "${nombreNuevo}" WHERE nombre = "${nombreViejo}"`, function(err, response)
     {
         if(err) throw err;
-
-        res.status(200).json({mensaje:"Actualizado"})
     })
+
+    res.send("Actualizado")
 }
 
 
